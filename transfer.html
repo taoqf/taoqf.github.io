@@ -10,10 +10,10 @@
 		</tr>
 		<tr>
 			<td style="width: 48%;">
-				<textarea id="t1" rows="20" style="width:100%"></textarea>
+				<textarea id="t1" rows="20" style="width:100%">This \r\n is \"A\"\r\n \t testing value.</textarea>
 			</td>
 			<td>
-				=>
+				<input type="button" value="=>">
 			</td>
 			<td style="width: 48%;">
 				<textarea id="r1" rows="20" style="width:100%" disabled></textarea>
@@ -24,10 +24,12 @@
 		</tr>
 		<tr>
 			<td>
-				<textarea id="t2" rows="20" style="width:100%"></textarea>
+				<textarea id="t2" rows="20" style="width:100%">This
+ is "A"
+ 	 testing value.</textarea>
 			</td>
 			<td>
-				=>
+				<input type="button" value="=>">
 			</td>
 			<td>
 				<textarea id="r2" rows="20" style="width:100%" disabled></textarea>
@@ -43,7 +45,7 @@
 		var r2 = document.getElementById('r2');
 		t1.addEventListener('blur', function(e){
 			if(t1.value){
-				r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\\t/g, "\t");
+				r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
 				r1.disabled = false;
 				r1.select();
 				document.execCommand("Copy");
@@ -52,7 +54,7 @@
 		});
 		t2.addEventListener('blur', function(e){
 			if(t2.value){
-				r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\\t");
+				r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\t");
 				r2.disabled = false;
 				r2.select();
 				document.execCommand("Copy");
