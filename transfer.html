@@ -10,13 +10,13 @@
 		</tr>
 		<tr>
 			<td style="width: 48%;">
-				<textarea id="t1" rows="20" style="width:100%">def atom(args, **funcs):\r\n from json import dumps\r\n dbaccFind = funcs['dbaccFind']\r\n dbaccSave = funcs['dbaccSave']\r\n dbaccCount = funcs['dbaccCount']\r\n nools_compile = funcs['nools_compile']\r\n query = [{\"query_mode\":1, \"spaceid\": \"feidao\", \"systemid\":\"18\", \"tablename\":\"trans_templ\", \"criteria\":{}, \"fields\":{}, \"page_no\":1, \"page_size\":10, \"sort\":{}, \"sql\":\" \" },{\"query_mode\":1, \"spaceid\": \"feidao\", \"systemid\":\"18\", \"tablename\":\"trans_cat\", \"criteria\":{}, \"fields\":{}, \"page_no\":1, \"page_size\":10, \"sort\":{}, \"sql\":\" \", \"test\": \"汉字\" } ]\r\n result = dbaccFind(query)\r\n logging.debug('test getting data:' + dumps(result))\r\n # raise RuntimeError('bbb');\r\n '''\r\n test function\r\n '''\r\n nools = '''\r\n //find any message that starts with hello\r\n rule Hello {\r\n when {\r\n m : OAV m.text =~ /^hello(\\\\s*world)?$/;\r\n }\r\n then {\r\n m.text += \" goodbye\";\r\n modify(m);\r\n }\r\n }\r\n\r\n //find all messages then end in goodbye\r\n rule Goodbye {\r\n when {\r\n m : OAV m.text =~ /.*goodbye$/;\r\n }\r\n then {\r\n console.log(m.text);\r\n }\r\n }\r\n '''\r\n result = nools_compile('feidao', [nools])\r\n logging.debug('test compiling rules:' + dumps(result))\r\n return True, result</textarea>
+				<textarea id="t1" rows="20" style="width:100%"></textarea>
 			</td>
 			<td>
 				=>
 			</td>
 			<td style="width: 48%;">
-				<textarea id="r1" rows="20" style="width:100%"></textarea>
+				<textarea id="r1" rows="20" style="width:100%" disabled></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -24,50 +24,13 @@
 		</tr>
 		<tr>
 			<td>
-				<textarea id="t2" rows="20" style="width:100%">def atom(args, **funcs):
- from json import dumps
- dbaccFind = funcs['dbaccFind']
- dbaccSave = funcs['dbaccSave']
- dbaccCount = funcs['dbaccCount']
- nools_compile = funcs['nools_compile']
- query = [{"query_mode":1, "spaceid": "feidao", "systemid":"18", "tablename":"trans_templ", "criteria":{}, "fields":{}, "page_no":1, "page_size":10, "sort":{}, "sql":" " },{"query_mode":1, "spaceid": "feidao", "systemid":"18", "tablename":"trans_cat", "criteria":{}, "fields":{}, "page_no":1, "page_size":10, "sort":{}, "sql":" ", "test": "汉字" } ]
- result = dbaccFind(query)
- logging.debug('test getting data:' + dumps(result))
- # raise RuntimeError('bbb');
- '''
- test function
- '''
- nools = '''
- //find any message that starts with hello
- rule Hello {
- when {
- m : OAV m.text =~ /^hello(\\\\s*world)?$/;
- }
- then {
- m.text += " goodbye";
- modify(m);
- }
- }
-
- //find all messages then end in goodbye
- rule Goodbye {
- when {
- m : OAV m.text =~ /.*goodbye$/;
- }
- then {
- console.log(m.text);
- }
- }
- '''
- result = nools_compile('feidao', [nools])
- logging.debug('test compiling rules:' + dumps(result))
- return True, result</textarea>
+				<textarea id="t2" rows="20" style="width:100%"></textarea>
 			</td>
 			<td>
 				=>
 			</td>
 			<td>
-				<textarea id="r2" rows="20" style="width:100%"></textarea>
+				<textarea id="r2" rows="20" style="width:100%" disabled></textarea>
 			</td>
 		</tr>
 	</table>
@@ -79,10 +42,28 @@
 		var t2 = document.getElementById('t2');
 		var r2 = document.getElementById('r2');
 		t1.addEventListener('blur', function(e){
-			r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\\t/g, "\t");
+			if(t1.value){
+				r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\\t/g, "\t");
+				r1.disabled = false;
+				r1.select();
+				document.execCommand("Copy");
+				r1.disabled = true;
+			}
 		});
 		t2.addEventListener('blur', function(e){
-			r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\\t");
+			if(t2.value){
+				r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\\t");
+				r2.disabled = false;
+				r2.select();
+				document.execCommand("Copy");
+				r2.disabled = true;
+			}
+		});
+		t1.addEventListener('mouseover', function(e){
+			t1.select();
+		});
+		t2.addEventListener('mouseover', function(e){
+			t2.select();
 		});
 	</script>
 </body>
