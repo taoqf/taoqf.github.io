@@ -14,7 +14,7 @@
 				<textarea id="t1" rows="20" style="width:100%">This \r\n is \"A\"\r\n \t testing value.</textarea>
 			</td>
 			<td>
-				<input type="button" value="=>">
+				<input type="button" id="b1" value="=>">
 			</td>
 			<td style="width: 48%;">
 				<textarea id="r1" rows="20" style="width:100%" readonly></textarea>
@@ -30,7 +30,7 @@
  	 testing value.</textarea>
 			</td>
 			<td>
-				<input type="button" value="=>">
+				<input type="button" id="b2" value="=>">
 			</td>
 			<td>
 				<textarea id="r2" rows="20" style="width:100%" readonly></textarea>
@@ -44,14 +44,16 @@
 		var r1 = document.getElementById('r1');
 		var t2 = document.getElementById('t2');
 		var r2 = document.getElementById('r2');
-		t1.addEventListener('blur', function(e){
+		var b1 = document.getElementById('b1');
+		var b2 = document.getElementById('b2');
+		b1.addEventListener('click', function(e){
 			if(t1.value){
 				r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
 				r1.select();
 				document.execCommand("Copy");
 			}
 		});
-		t2.addEventListener('blur', function(e){
+		b2.addEventListener('click', function(e){
 			if(t2.value){
 				r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\t");
 				r2.select();
