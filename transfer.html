@@ -56,7 +56,7 @@
 		}
 		b1.addEventListener('click', function(e){
 			if(t1.value){
-				r1.value = t1.value.replace(/\\\\r\\\\n/g, "\n").replace(/\\r\\n/g, "\n").replace(/\\\\\"/g, "\"").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
+				r1.value = t1.value.replace(/\\\\r\\\\n/g, "\n").replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\\\\\"/g, "\"").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
 				r1.select();
 				document.execCommand("Copy");
 				show_msg("Result copied.");
