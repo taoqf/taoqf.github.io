@@ -5,6 +5,7 @@
 </head>
 <body>
 	If you have any problem or advice, please <a href="https://github.com/taoqf/taoqf.github.io/issues">let me know.</a>
+	<pre id="info" style="text-align: center;">&nbsp;</pre>
 	<table style="width: 100%;">
 		<tr>
 			<td colspan="3"><label>To Human</label></td>
@@ -46,11 +47,19 @@
 		var r2 = document.getElementById('r2');
 		var b1 = document.getElementById('b1');
 		var b2 = document.getElementById('b2');
+		var info = document.getElementById('info');
+		function show_msg(msg){
+			info.textContent = msg;
+			setTimeout(function(){
+				info.textContent = ' ';
+			}, 2000);
+		}
 		b1.addEventListener('click', function(e){
 			if(t1.value){
-				r1.value = t1.value.replace(/\\r\\n/g, "\n").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
+				r1.value = t1.value.replace(/\\\\r\\\\n/g, "\n").replace(/\\r\\n/g, "\n").replace(/\\\\\"/g, "\"").replace(/\\\"/g, "\"").replace(/\\t/g, "\t");
 				r1.select();
 				document.execCommand("Copy");
+				show_msg("Result copied.");
 			}
 		});
 		b2.addEventListener('click', function(e){
@@ -58,6 +67,7 @@
 				r2.value = t2.value.replace(/\n/g, "\\r\\n").replace(/\"/g, "\\\"").replace(/\t/g, "\\t");
 				r2.select();
 				document.execCommand("Copy");
+				show_msg("Result copied.");
 			}
 		});
 		t1.addEventListener('mouseover', function(e){
